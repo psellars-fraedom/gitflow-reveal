@@ -23,10 +23,16 @@ locations
 * [Docker Client Binaries](https://docs.docker.com/installation/binaries/#get-the-windows-binary)
 * [Docker Machine Binaries](https://github.com/docker/machine/releases/)
 
-After installing the binaries check that they are working as expected
+After installing the binaries check that they are working as expected - you should see output
+similar to that displayed below for each of the binaries.
 
 ```bash
-docker-machine
+$ docker -v
+Docker version 1.8.1, build d12ea79
+```
+
+```bash
+$ docker-machine
 Usage: C:\ProgramData\chocolatey\lib\docker-machine\bin\docker-machine.exe [OPTIONS] COMMAND [arg...]                               
                                                                                                                                     
 Create and manage machines running Docker.                                                                                          
@@ -71,16 +77,23 @@ Commands:
 Run 'C:\ProgramData\chocolatey\lib\docker-machine\bin\docker-machine.exe COMMAND --help' for more information on a command.         
 ```
 
-```bash
-docker -v
-Docker version 1.8.1, build d12ea79
-```
-
 ### Hyper-V
-Instructions to follow!!
+__Work In Progress__
+
+Please refer to some specific requirments of Hyper-V for use with
+Docker Machine outlined [here](https://docs.docker.com/machine/drivers/hyper-v/)
+before trying to create a Docker Machine instance.
+
+```bash
+docker-machine create --driver hyper-v presentation-vm
+```
 
 ### Virtualbox
 Instructions to follow!!
+
+```bash
+docker-machine create --driver virtualbox presentation-vm
+```
 
 ## Running the Docker Reveal Container & Presentation
 Instructions to follow!!
