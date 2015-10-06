@@ -85,14 +85,61 @@ Docker Machine outlined [here](https://docs.docker.com/machine/drivers/hyper-v/)
 before trying to create a Docker Machine instance.
 
 ```bash
-docker-machine create --driver hyper-v presentation-vm
+$ docker-machine create --driver hyper-v presentation-vm
+```
+
+Check the instance was created
+
+```bash
+$ docker-machine ls --filter driver=hyper-v
+NAME               ACTIVE   DRIVER    STATE     URL   SWARM
+presentation-vm             hyper-v   Timeout
+```
+
+Start the instance
+
+```bash
+$ docker-machine start presentation-vm
+Starting VM...
+Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
+```
+
+Check that it is running
+
+```bash
+$ docker-machine ls --filter driver=hyper-v
+NAME                  ACTIVE   DRIVER    STATE     URL                         SWARM
+presentation-vm                hyper-v   Running   tcp://192.168.99.100:2376
 ```
 
 ### Virtualbox
 Instructions to follow!!
 
 ```bash
-docker-machine create --driver virtualbox presentation-vm
+$ docker-machine create --driver virtualbox presentation-vm
+```
+
+Check the instance was created
+```bash
+$ docker-machine ls --filter driver=virtualbox
+NAME               ACTIVE   DRIVER       STATE     URL   SWARM
+presentation-vm             virtualbox   Timeout
+```
+
+Start the instance
+
+```bash
+$ docker-machine start presentation-vm
+Starting VM...
+Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
+```
+
+Check that it is running
+
+```bash
+$ docker-machine ls --filter driver=virtualbox
+NAME                  ACTIVE   DRIVER       STATE     URL                         SWARM
+presentation-vm                virtualbox   Running   tcp://192.168.99.100:2376
 ```
 
 ## Running the Docker Reveal Container & Presentation
