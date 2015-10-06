@@ -78,7 +78,7 @@ Run 'C:\ProgramData\chocolatey\lib\docker-machine\bin\docker-machine.exe COMMAND
 ```
 
 ### Hyper-V
-__Work In Progress__
+How to create a Docker Machine instance using the hyper-v driver
 
 Please refer to some specific requirments of Hyper-V for use with
 Docker Machine outlined [here](https://docs.docker.com/machine/drivers/hyper-v/)
@@ -113,7 +113,7 @@ presentation-vm                hyper-v   Running   tcp://192.168.99.100:2376
 ```
 
 ### Virtualbox
-Instructions to follow!!
+How to create a Docker Machine instance using the Virtualbox driver
 
 ```bash
 $ docker-machine create --driver virtualbox presentation-vm
@@ -140,6 +140,51 @@ Check that it is running
 $ docker-machine ls --filter driver=virtualbox
 NAME                  ACTIVE   DRIVER       STATE     URL                         SWARM
 presentation-vm                virtualbox   Running   tcp://192.168.99.100:2376
+```
+
+In order for the presentation to be available in a local web browser you will
+need to enable port forwarding on port 9000. The simplest way to do this is to
+set it via the network settings in the Virtualbox GUI.
+
+TODO: Can this port be set via Docker Machine?
+
+## Connecting to the Docker Machine Instance using the Docker Client
+In order to pull and run the Docker Container used for the presentation framework
+you need to connect to the Docker Machine instance with the Docker client. When
+starting the Docker Machine instance it prompted you to check this, so lets do
+that now.
+
+Here we are using the ```--shell=cmd```, you may prefer to use the ```--shell=powershell```
+
+```bash
+$ docker-machine env presentation-vm --shell=cmd
+set DOCKER_TLS_VERIFY=1
+set DOCKER_HOST=tcp://192.168.99.100:2376
+set DOCKER_CERT_PATH=C:\Users\psellars\.docker\machine\machines\presentation-vm
+set DOCKER_MACHINE_NAME=presentation-vm
+    # Run this command to configure your shell:
+    # copy and paste the above values into your command prompt
+```
+
+As the output instructs copy and paste the values from the output into your
+command prompt/powershell terminal. Your Docker Client should now be connected
+to your Docker Machine instance.
+
+```bash
+$ docker -v
+Docker version 1.8.1, build d12ea79
+
+$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+```
+
+## Pulling the Presentation Runner Container
+This presentation is currently using the [dordoka/reveal](https://hub.docker.com/r/dordoka/reveal/)
+container to run inside. Pull the latest image from the Docker Hub
+
+```bash
+$ docker pull dordoka/reveal
+
 ```
 
 ## Running the Docker Reveal Container & Presentation
